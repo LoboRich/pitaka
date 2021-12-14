@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2021_12_14_115029) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -28,6 +27,13 @@ ActiveRecord::Schema.define(version: 2021_12_14_115029) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "market_portfolios", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "portfolio_id"
+    t.uuid "market_id"
+    t.float "stocks"
+    t.float "revenue"
+  end
+
   create_table "logs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "account_id"
     t.text "description"
@@ -42,6 +48,12 @@ ActiveRecord::Schema.define(version: 2021_12_14_115029) do
     t.text "description"
     t.float "buying_price"
     t.float "selling_price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "portfolios", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
