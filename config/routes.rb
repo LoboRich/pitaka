@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :wallets
+  resources :logs
+  resources :portfolios
   resources :market_portfolios
   resources :markets
   devise_for :users
