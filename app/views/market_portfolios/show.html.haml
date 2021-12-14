@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Portfolio:
+  = @market_portfolio.portfolio_id
+%p
+  %b Market:
+  = @market_portfolio.market_id
+%p
+  %b Stocks:
+  = @market_portfolio.stocks
+%p
+  %b Revenue:
+  = @market_portfolio.revenue
+
+= link_to 'Edit', edit_market_portfolio_path(@market_portfolio)
+\|
+= link_to 'Back', market_portfolios_path
