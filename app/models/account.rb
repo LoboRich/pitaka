@@ -3,4 +3,11 @@ class Account < ApplicationRecord
 	has_one :user
   	accepts_nested_attributes_for :user
   	enum roles: { admin: "admin", broker: "broker", trader: "trader"}
+
+		has_one :portfolio
+		after_create :create_portfolio
+
+		def create_portfolio 
+			Portfolio.create(account: self)
+		end
 end
