@@ -1,0 +1,2 @@
+class MarketPortfolio < ApplicationRecord
+end
