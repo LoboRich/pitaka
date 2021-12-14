@@ -1,0 +1,25 @@
+%h1 Listing logs
+
+%table
+  %thead
+    %tr
+      %th Account
+      %th Description
+      %th Date
+      %th
+      %th
+      %th
+
+  %tbody
+    - @logs.each do |log|
+      %tr
+        %td= log.account_id
+        %td= log.description
+        %td= log.created_at.strftime("%m/%d/%Y %I:%M%p")
+        %td= link_to 'Show', log
+        %td= link_to 'Edit', edit_log_path(log)
+        %td= link_to 'Destroy', log, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Log', new_log_path
