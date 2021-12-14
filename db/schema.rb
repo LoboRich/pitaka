@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_065636) do
+ActiveRecord::Schema.define(version: 2021_12_13_131732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 2021_12_13_065636) do
     t.text "address"
     t.string "contact_number"
     t.boolean "is_verified"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "markets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "logo"
+    t.string "name"
+    t.string "symbol"
+    t.text "description"
+    t.float "buying_price"
+    t.float "selling_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
