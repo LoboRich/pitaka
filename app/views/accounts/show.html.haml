@@ -1,5 +1,6 @@
 %p#notice= notice
 
+= link_to 'Logout', destroy_user_session_path, method: :delete
 %p
   %b Img:
   = @account.img
