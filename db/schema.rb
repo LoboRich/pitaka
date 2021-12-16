@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_115029) do
     t.string "lastname"
     t.text "address"
     t.string "contact_number"
-    t.boolean "is_verified"
+    t.boolean "is_verified", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

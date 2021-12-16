@@ -7,7 +7,7 @@ class CreateAccounts < ActiveRecord::Migration[6.0]
       t.string :lastname
       t.text :address
       t.string :contact_number
-      t.boolean :is_verified
+      t.boolean :is_verified, default: false
 
       t.timestamps
     end

@@ -1,13 +1,20 @@
 class AccountsController < ApplicationController
+  before_action :authenticate_user!, :except => [:new]
   before_action :set_account, only: %i[ show edit update destroy ]
 
   # GET /accounts or /accounts.json
   def index
-    @accounts = Account.all
+    
+    if current_user.account.role == 'admin'
+      @accounts = Account.all
+    else
+      redirect_to account_path(current_user.account)
+    end
   end
 
   # GET /accounts/1 or /accounts/1.json
   def show
+      @account = current_user.account
   end
 
   # GET /accounts/new
