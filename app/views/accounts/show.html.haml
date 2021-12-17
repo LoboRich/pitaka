@@ -1,31 +1,58 @@
 %p#notice= notice
 
-%p
-  %b Img:
-  = @account.img
-%p
-  %b Role:
-  = @account.role
-%p
-  %b Firstname:
-  = @account.firstname
-%p
-  %b Lastname:
-  = @account.lastname
-%p
-  %b Address:
-  = @account.address
-%p
-  %b Contact number:
-  = @account.contact_number
-%p
-  %b Is verified:
-  = @account.is_verified
+-# %p
+-#   %b Img:
+-#   = @account.img
+-# %p
+-#   %b Role:
+-#   = @account.role
+-# %p
+-#   %b Firstname:
+-#   = @account.firstname
+-# %p
+-#   %b Lastname:
+-#   = @account.lastname
+-# %p
+-#   %b Address:
+-#   = @account.address
+-# %p
+-#   %b Contact number:
+-#   = @account.contact_number
+-# %p
+-#   %b Is verified:
+-#   = @account.is_verified
 
-%p
-  %b Wallet:
-  = @account.wallet.balance
+-# %p
+-#   %b Wallet:
+-#   = @account.wallet.balance
 
-= link_to 'Edit', edit_account_path(@account)
-\|
-= link_to 'Back', accounts_path
+-# = link_to 'Edit', edit_account_path(@account)
+-# \|
+-# = link_to 'Back', accounts_path
+
+
+%div{class: "bg-white flex flex-col"}
+  %div{class: "sticky top-0 z-50 w-screen bg-dark-brown h-12 text-white flex flex-row justify-between items-center px-10"}
+    %div{class:""}
+      %h1 LOGO HERE
+    %div{class:"flex flex-row justify-between items-center gap-10"}
+      %h1 LINKS HERE
+      %h1 LINKS HERE
+      %h1 LINKS HERE
+  %div{class: "flex flex-row justify-between item-center gap-14 "}
+    %div{class: "flex flex-row"}
+      %h1 PICTURE HERE
+      %div{class: "flex flex-col"}
+        %h1 Kimcarl Cacas
+        %p las pinas, metro manila 
+        %p 09665338673
+    %div{}
+      %div
+        %p Php 100,000.00
+        %p Account Balance
+    %div
+  %div
+    %div
+    %div
+  
+  
