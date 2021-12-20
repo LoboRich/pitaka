@@ -17,6 +17,7 @@ gem 'devise'
 gem 'hamlit-rails'
 gem 'pry'
 gem 'carrierwave', '~> 2.0'
+gem "pundit"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

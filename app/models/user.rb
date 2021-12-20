@@ -4,4 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :account
+
+  def role
+    self.account.role
+  end
 end
