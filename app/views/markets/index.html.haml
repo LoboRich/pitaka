@@ -22,9 +22,12 @@
         %td= market.description
         %td= market.buying_price
         %td= market.selling_price
-        %td= link_to 'Show', market
-        %td= link_to 'Edit', edit_market_path(market)
-        %td= link_to 'Destroy', market, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        - if policy(:market).buy?
+          %td= link_to 'Buy', market
+        - if policy(:market).actions?
+          %td= link_to 'Show', market
+          %td= link_to 'Edit', edit_market_path(market)
+          %td= link_to 'Destroy', market, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
