@@ -1,31 +1,52 @@
-%h1 Listing markets
+-# %h1 Listing markets
 
-%table
-  %thead
-    %tr
-      %th Logo
-      %th Name
-      %th Symbol
-      %th Description
-      %th Buying price
-      %th Selling price
-      %th
-      %th
-      %th
+-# %table
+-#   %thead
 
-  %tbody
-    - @markets.each do |market|
+-# %br
+
+%link{:href => "https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css", :rel => "stylesheet"}
+%link{:href => "https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css", :rel => "stylesheet"}
+%link{:href => "https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css", :rel => "stylesheet"}
+%script{:src => "https://code.jquery.com/jquery-3.5.1.js", :type => "text/javascript"}
+%script{:src => "https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js", :type => "text/javascript"}
+%script{:src => "https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js", :type => "text/javascript"}
+%script{:src => "https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js", :type => "text/javascript"}
+%script{:src => "https://cdn.datatables.net/buttons/1.7.0/js/buttons.colVis.min.js", :type => "text/javascript"}
+
+.table-responsive
+  %table.table.table-bordered.table-hover.dt-responsive
+    %thead
       %tr
-        %td= market.logo
-        %td= market.name
-        %td= market.symbol
-        %td= market.description
-        %td= market.buying_price
-        %td= market.selling_price
-        %td= link_to 'Show', market
-        %td= link_to 'Edit', edit_market_path(market)
-        %td= link_to 'Destroy', market, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
+        %th Logo
+        %th Name
+        %th Symbol
+        %th Buying price
+        %th Selling price
+        %th Action
+    %tbody{class: "text-center"}
+      - @markets.each do |market|
+        %tr
+          %td= market.logo
+          %td= market.name
+          %td= market.symbol
+          %td= market.buying_price
+          %td= market.selling_price
+          %td
+            = link_to 'Show', market
+            = link_to 'Edit', edit_market_path(market)
+            = link_to 'Destroy', market, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 = link_to 'New Market', new_market_path
+
+:javascript 
+  $(document).ready(function() {
+    var dataTable = $('table').DataTable();
+
+    document.addEventListener("turbolinks:before-cache", function() {
+      if (dataTable !== null) {
+       dataTable.destroy();
+       dataTable = null;
+      }
+    });
+  } );
