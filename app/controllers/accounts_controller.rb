@@ -4,8 +4,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts or /accounts.json
   def index
-    
-    if current_user.account.role == 'admin'
+    if current_user.role == 'admin'
       @accounts = Account.all
     else
       redirect_to account_path(current_user.account)
@@ -14,7 +13,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1 or /accounts/1.json
   def show
-      @account = current_user.account
+    @account = current_user.account
   end
 
   # GET /accounts/new
