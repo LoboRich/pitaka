@@ -3,7 +3,15 @@ Rails.application.routes.draw do
   resources :logs
   resources :portfolios
   resources :market_portfolios
-  resources :markets
+
+
+  resources :markets do
+    collection do
+      post :buy
+      post :sell
+    end
+  end
+
   devise_for :users
   resources :users
   resources :accounts

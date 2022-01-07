@@ -1,5 +1,5 @@
 class MarketsController < ApplicationController
-  before_action :set_market, only: %i[ show edit update destroy ]
+  before_action :set_market, only: %i[ show edit update destroy buy sell]
 
   # GET /markets or /markets.json
   def index
@@ -57,6 +57,14 @@ class MarketsController < ApplicationController
   end
 
   def buy
+    account_balance = current_user.account.wallet.balance
+    new_balance = account_balance.update(account_balance - @market.buying_price)
+    MarketPortfolio.create(portfolio_id: current_user.account.portfolio.id, market_id: @market.id, stocks: params[:stocks], revenue: params[:revenue])
+  end
+
+  def sell
+    binding.pry
+    wallet = current_user.account.wallet
   end
 
   private
