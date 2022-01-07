@@ -7,8 +7,9 @@
       %th Name
       %th Symbol
       %th Description
-      %th Buying price
-      %th Selling price
+      %th Supply
+      %th Market Cap
+      %th Price
       %th
       %th
       %th
@@ -20,8 +21,9 @@
         %td= market.name
         %td= market.symbol
         %td= market.description
-        %td= market.buying_price
-        %td= market.selling_price
+        %td= market.supply
+        %td= market.market_cap
+        %td= market.market_cap / market.supply
         %td= link_to 'Show', market
         %td= link_to 'Edit', edit_market_path(market)
         %td= link_to 'Destroy', market, :method => :delete, :data => { :confirm => 'Are you sure?' }
