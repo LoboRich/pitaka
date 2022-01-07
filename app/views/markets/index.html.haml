@@ -1,7 +1,7 @@
 
 %link{href: "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css", rel: "stylesheet"}/
 -#%link{href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css", rel: "stylesheet"}/
-
+%p#notice= notice
 %h1 Listing markets
 
 %table
@@ -38,5 +38,5 @@
 
 
 %br
-
-= link_to 'New Market', new_market_path
+- if policy(:market).actions?
+  = link_to 'New Market', new_market_path
