@@ -75,6 +75,6 @@ class MarketsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def market_params
-      params.require(:market).permit(:logo, :name, :symbol, :description, :buying_price, :selling_price)
+      params.require(:market).permit(:logo, :name, :symbol, :description, :buying_price, :selling_price, :supply, :market_cap)
     end
 end

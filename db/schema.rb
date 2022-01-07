@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 2021_12_14_115029) do
     t.string "name"
     t.string "symbol"
     t.text "description"
+    t.float "supply"
+    t.float "market_cap"
     t.float "buying_price"
     t.float "selling_price"
     t.datetime "created_at", precision: 6, null: false

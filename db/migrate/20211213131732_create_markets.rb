@@ -5,6 +5,8 @@ class CreateMarkets < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :symbol
       t.text :description
+      t.float :supply
+      t.float :market_cap
       t.float :buying_price
       t.float :selling_price
 
