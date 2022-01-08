@@ -10,6 +10,6 @@ class Market < ApplicationRecord
   end
 
   def self.sufficient_supply?(market, stocks)
-    market.supply > stocks
+    market.supply > stocks.to_f
   end
 end
