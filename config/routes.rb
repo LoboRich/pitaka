@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
   resources :wallets
   resources :logs
-  resources :portfolios
-  resources :market_portfolios
-
-
   resources :markets do
-    collection do
+    member do
       post :buy
       post :sell
     end
@@ -14,7 +10,12 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
-  resources :accounts
+  resources :accounts do
+    resources :logs
+    resources :portfolios do
+      resources :market_portfolios
+    end
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   root 'accounts#index'

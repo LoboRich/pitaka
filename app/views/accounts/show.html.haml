@@ -30,3 +30,30 @@
 = link_to 'Edit', edit_account_path(@account)
 \|
 = link_to 'Back', accounts_path
+
+
+%h1 Listing market_portfolios
+
+%table
+  %thead
+    %tr
+      %th Market
+      %th Stocks
+      %th Revenue
+      %th
+      %th
+      %th
+
+  %tbody
+    - @portfolio.each do |market_portfolio|
+      %tr
+        %td= market_portfolio.market.name
+        %td= market_portfolio.stocks
+        %td= market_portfolio.revenue
+        %td= link_to 'Show', market_portfolio
+        %td= link_to 'Edit', edit_market_portfolio_path(market_portfolio)
+        %td= link_to 'Destroy', market_portfolio, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Market portfolio', new_market_portfolio_path

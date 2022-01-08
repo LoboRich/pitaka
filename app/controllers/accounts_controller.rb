@@ -14,6 +14,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1 or /accounts/1.json
   def show
     @account = current_user.account
+    @portfolio = current_user.account.portfolio.market_portfolios
   end
 
   # GET /accounts/new

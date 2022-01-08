@@ -57,13 +57,18 @@ class MarketsController < ApplicationController
   end
 
   def buy
-    account_balance = current_user.account.wallet.balance
-    new_balance = account_balance.update(account_balance - @market.buying_price)
-    MarketPortfolio.create(portfolio_id: current_user.account.portfolio.id, market_id: @market.id, stocks: params[:stocks], revenue: params[:revenue])
+    balance = Wallet.sufficient_balance?(current_user.account.wallet, params['price'])
+    stocks = Market.sufficient_supply?(@market, params['stocks'])
+    if balance && stocks
+      Wallet.deduct(current_user.account.wallet, params['price'])
+      Market.deduct_stocks(@market, params['stocks'])
+      MarketPortfolio.create(portfolio_id: current_user.account.portfolio.id, market_id: @market.id, stocks: params[:stocks])
+    else
+      redirect_to markets_url, notice: "Wallet balance is not enough."
+    end
   end
 
   def sell
-    binding.pry
     wallet = current_user.account.wallet
   end
 
