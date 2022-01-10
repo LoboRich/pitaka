@@ -1,6 +1,5 @@
-
 %link{href: "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css", rel: "stylesheet"}/
--#%link{href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css", rel: "stylesheet"}/
+
 %p#notice= notice
 %h1 Listing markets
 
@@ -28,15 +27,65 @@
         %td= market.supply
         %td= market.market_cap
         %td= market.market_cap / market.supply
-        - if policy(:market).buy?
-          %td
+        %td
+          - if policy(:market).buy? && policy(:market).sell?
+            %div
+              %a.bg-blue-500.py-2.px-5.text-white.rounded.modal-open{"data-target" => "buy-#{market.id}", "data-toggle" => "modal"} BUY
+              %a.bg-green-500.py-2.px-5.text-white.rounded.modal-open{"data-target" => "sell-#{market.id}", "data-toggle" => "modal"} SELL
             = render :partial => 'buy_form', :locals => { :info => market }
-        - if policy(:market).actions?
-          %td= link_to 'Show', market
-          %td= link_to 'Edit', edit_market_path(market)
-          %td= link_to 'Destroy', market, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            = render :partial => 'sell_form', :locals => { :info => market }
+                  
+          - if policy(:market).actions?
+            %td= link_to 'Show', market
+            %td= link_to 'Edit', edit_market_path(market)
+            %td= link_to 'Destroy', market, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 
 %br
 - if policy(:market).actions?
   = link_to 'New Market', new_market_path
+
+
+
+:javascript
+  var openmodal = document.querySelectorAll('.modal-open')
+     let selectedModalTargetId = ''
+     for (var i = 0; i < openmodal.length; i++) {
+       openmodal[i].addEventListener('click', function(event){
+         selectedModalTargetId = event.target.attributes.getNamedItem('data-target').value
+         event.preventDefault()
+         toggleModal()
+       })
+     }
+  
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+  
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+      closemodal[i].addEventListener('click', toggleModal)
+    }
+  
+    document.onkeydown = function(evt) {
+      evt = evt || window.event
+      var isEscape = false
+      if ("key" in evt) {
+        isEscape = (evt.key === "Escape" || evt.key === "Esc")
+      } else {
+        isEscape = (evt.keyCode === 27)
+      }
+      if (isEscape && document.body.classList.contains('modal-active')) {
+        toggleModal()
+      }
+    }
+  
+    function toggleModal () {
+      if(!selectedModalTargetId) {
+        return
+      }
+      const body = document.querySelector('body')
+      const modal = document.getElementById(selectedModalTargetId)
+      modal.classList.toggle('opacity-0')
+      modal.classList.toggle('pointer-events-none')
+      body.classList.toggle('modal-active')
+    }
