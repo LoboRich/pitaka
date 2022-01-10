@@ -13,6 +13,13 @@ class MarketPolicy < ApplicationPolicy
     ].include?(user.role)
   end
 
+  def sell?
+    [
+      'broker',
+      'trader'
+    ].include?(user.role)
+  end
+
   def actions?
     [
       'admin'
