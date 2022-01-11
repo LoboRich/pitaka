@@ -8,10 +8,12 @@
     %meta{content: "name", name: "author"}/
     %meta{content: "description here", name: "description"}/
     %meta{content: "keywords,here", name: "keywords"}/
+    %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"} 
     %link{href: "https://use.fontawesome.com/releases/v5.3.1/css/all.css", rel: "stylesheet"}/
     %link{href: "https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css", rel: "stylesheet"}/
     %link{href: "https://afeld.github.io/emoji-css/emoji.css", rel: "stylesheet"}/
-    
+    %link{href: "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css", rel: "stylesheet"}/
+
   %body.bg-gray-800.font-sans.leading-normal.tracking-normal.mt-12
     = render :partial => 'layouts/header'
     %main
