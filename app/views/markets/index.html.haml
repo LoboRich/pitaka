@@ -1,3 +1,4 @@
+= render :partial => 'layouts/table_links'
 %section.md:container.md:mx-auto
   #main.main-content.flex-1.bg-gray-100.mt-12.md:mt-2.pb-24.md:pb-5
     .bg-gray-800.pt-3
@@ -49,9 +50,9 @@
       .flex.flex-col
         .-my-2.overflow-x-auto.sm:-mx-6.lg:-mx-8
           .py-2.align-middle.inline-block.min-w-full.sm:px-6.lg:px-8
-            .shadow.overflow-hidden.border-b.border-gray-200.sm:rounded-lg
-              %table.min-w-full.divide-y.divide-gray-200
-                %thead.bg-gray-50
+            %body.bg-gray-100.text-gray-900.tracking-wider.leading-normal
+              %table#example.stripe.hover{style: "width:100%; padding-top: 1em;  padding-bottom: 1em;"}
+                %thead
                   %tr
                     %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
                       Market
@@ -63,8 +64,8 @@
                       Price
                     %th.relative.px-6.py-3{scope: "col"}
                       %span.sr-only Actions
-                
-                %tbody.bg-white.divide-y.divide-gray-200
+                    
+                %tbody
                   - @markets.each do |market|
                     %tr
                       %td.px-6.py-4.whitespace-nowrap
@@ -98,6 +99,12 @@
                           = link_to 'Destroy', market, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 :javascript
+  var table = $('#example').DataTable( {
+    responsive: true
+  } )
+  .columns.adjust()
+  .responsive.recalc();
+  
   var openmodal = document.querySelectorAll('.modal-open')
     let selectedModalTargetId = ''
     for (var i = 0; i < openmodal.length; i++) {
