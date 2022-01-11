@@ -13,4 +13,8 @@
     %link{href: "https://afeld.github.io/emoji-css/emoji.css", rel: "stylesheet"}/
     
   %body.bg-gray-800.font-sans.leading-normal.tracking-normal.mt-12
-    = yield
+    = render :partial => 'layouts/header'
+    %main
+      .flex.flex-col.md:flex-row
+        = render :partial => 'layouts/sidebar'
+        = yield
