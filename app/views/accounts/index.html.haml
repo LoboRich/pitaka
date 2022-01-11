@@ -1,33 +1,133 @@
-%h1 Listing accounts
+= render :partial => 'layouts/table_links'
+%section.md:container.md:mx-auto
+  #main.main-content.flex-1.bg-gray-100.mt-12.md:mt-2.pb-24.md:pb-5
+    .bg-gray-800.pt-3
+      .rounded-tl-3xl.bg-gradient-to-r.from-blue-900.to-gray-800.p-4.shadow.text-2xl.text-white
+        %h1.font-bold.pl-2 Accounts
+    
+    .flex.flex-col.mt-2.w-full.p-6
+      - if policy(:account).actions?
+        .w-full.p-4
+          %a.bg-indigo-600.py-2.px-5.text-white.hover:bg-white.hover:text-indigo-900.sm:rounded-lg.float-right{href: new_account_path} Add Account
+      .flex.flex-col
+        .-my-2.overflow-x-auto.sm:-mx-6.lg:-mx-8
+          .py-2.align-middle.inline-block.min-w-full.sm:px-6.lg:px-8
+            %body.bg-gray-100.text-gray-900.tracking-wider.leading-normal
+              %table#example.stripe.hover{style: "width:100%; padding-top: 1em;  padding-bottom: 1em;"}
+                %thead
+                  %tr
+                    %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
+                      Name
+                    %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
+                      Address
+                    %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
+                      Contact Number
+                    %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
+                      Status
+                    %th.relative.px-6.py-3{scope: "col"}
+                      %span.sr-only Actions
+                    
+                %tbody
+                  - @accounts.each do |account|
+                    %tr
+                      %td.px-6.py-4.whitespace-nowrap
+                        .flex.items-center
+                          .flex-shrink-0.h-10.w-10
+                            %img.h-10.w-10.rounded-full{alt: "", src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"}/
+                          .ml-4
+                            .text-sm.font-medium.text-gray-900
+                              = "#{account.firstname} #{account.lastname}"
+                            .text-sm.text-gray-500
+                              = account.role
+                      %td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
+                        = account.address
+                      %td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
+                        = account.contact_number
+                      %td.px-6.py-4.whitespace-nowrap
+                        %span.px-2.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-green-100.text-green-800
+                          = account.is_verified
+                      %td.px-6.py-4.whitespace-nowrap.text-right.text-sm.font-medium
+                        - if policy(:account).actions?
+                          = link_to 'Show', account
+                          = link_to 'Edit', edit_account_path(account)
+                          = link_to 'Destroy', account, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%table
-  %thead
-    %tr
-      %th Img
-      %th Role
-      %th Firstname
-      %th Lastname
-      %th Address
-      %th Contact number
-      %th Is verified
-      %th
-      %th
-      %th
+:javascript
+  var table = $('#example').DataTable( {
+    responsive: true
+  } )
+  .columns.adjust()
+  .responsive.recalc();
+  
+  var openmodal = document.querySelectorAll('.modal-open')
+    let selectedModalTargetId = ''
+    for (var i = 0; i < openmodal.length; i++) {
+      openmodal[i].addEventListener('click', function(event){
+        selectedModalTargetId = event.target.attributes.getNamedItem('data-target').value
+        event.preventDefault()
+        toggleModal()
+      })
+    }
 
-  %tbody
-    - @accounts.each do |account|
-      %tr
-        %td= account.img
-        %td= account.role
-        %td= account.firstname
-        %td= account.lastname
-        %td= account.address
-        %td= account.contact_number
-        %td= account.is_verified
-        %td= link_to 'Show', account
-        %td= link_to 'Edit', edit_account_path(account)
-        %td= link_to 'Destroy', account, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  const overlay = document.querySelector('.modal-overlay')
+  overlay.addEventListener('click', toggleModal)
 
-%br
+  var closemodal = document.querySelectorAll('.modal-close')
+  for (var i = 0; i < closemodal.length; i++) {
+    closemodal[i].addEventListener('click', toggleModal)
+  }
 
-= link_to 'New Account', new_account_path
+  document.onkeydown = function(evt) {
+    evt = evt || window.event
+    var isEscape = false
+    if ("key" in evt) {
+      isEscape = (evt.key === "Escape" || evt.key === "Esc")
+    } else {
+      isEscape = (evt.keyCode === 27)
+    }
+    if (isEscape && document.body.classList.contains('modal-active')) {
+      toggleModal()
+    }
+  }
+
+  function toggleModal () {
+    if(!selectedModalTargetId) {
+      return
+    }
+    const body = document.querySelector('body')
+    const modal = document.getElementById(selectedModalTargetId)
+    modal.classList.toggle('opacity-0')
+    modal.classList.toggle('pointer-events-none')
+    body.classList.toggle('modal-active')
+  }
+  /*Toggle dropdown list*/
+  function toggleDD(myDropMenu) {
+      document.getElementById(myDropMenu).classList.toggle("invisible");
+  }
+  /*Filter dropdown options*/
+  function filterDD(myDropMenu, myDropMenuSearch) {
+      var input, filter, ul, li, a, i;
+      input = document.getElementById(myDropMenuSearch);
+      filter = input.value.toUpperCase();
+      div = document.getElementById(myDropMenu);
+      a = div.getElementsByTagName("a");
+      for (i = 0; i < a.length; i++) {
+          if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+              a[i].style.display = "";
+          } else {
+              a[i].style.display = "none";
+          }
+      }
+  }
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+      if (!event.target.matches('.drop-button') && !event.target.matches('.drop-search')) {
+          var dropdowns = document.getElementsByClassName("dropdownlist");
+          for (var i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (!openDropdown.classList.contains('invisible')) {
+                  openDropdown.classList.add('invisible');
+              }
+          }
+      }
+  }

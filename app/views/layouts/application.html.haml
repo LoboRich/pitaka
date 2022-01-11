@@ -15,8 +15,11 @@
     %link{href: "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css", rel: "stylesheet"}/
 
   %body.bg-gray-800.font-sans.leading-normal.tracking-normal.mt-12
-    = render :partial => 'layouts/header'
-    %main
-      .flex.flex-col.md:flex-row
-        = render :partial => 'layouts/sidebar'
-        = yield
+    - if user_signed_in?
+      = render :partial => 'layouts/header'
+      %main
+        .flex.flex-col.md:flex-row
+          = render :partial => 'layouts/sidebar'
+          = yield
+    - else
+      = yield

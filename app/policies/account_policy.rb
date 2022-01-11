@@ -11,6 +11,12 @@ class AccountPolicy < ApplicationPolicy
         'admin'
       ].include?(user.role)
     end
+
+    def actions?
+      [
+        'admin'
+      ].include?(user.role)
+    end
     
     class Scope
       attr_reader :user, :scope
