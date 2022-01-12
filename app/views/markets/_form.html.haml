@@ -1,28 +1,42 @@
 = form_for @market do |f|
-  - if @market.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@market.errors.count, "error")} prohibited this market from being saved:"
-      %ul
-        - @market.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :logo
-    = f.text_field :logo
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :symbol
-    = f.text_field :symbol
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :supply
-    = f.number_field :supply
-  .field
-    = f.label :market_cap
-    = f.number_field :market_cap
-  .actions
-    = f.submit 'Save'
+  .flex.flex-wrap.-mx-3.mb-6
+    .w-full.px-3
+      %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "market_logo"}
+        Image
+      = f.file_field :logo, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "Logo"
+  .flex.flex-wrap.-mx-3.mb-6
+    .w-full.px-3.mb-6.md:mb-0{class: "md:w-1/2"}
+      %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "market_name"}
+        Name
+      = f.text_field :name, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "San Miguel"
+      -#%p.text-red-500.text-xs.italic Please fill out this field.
+    .w-full.px-3{class: "md:w-1/2"}
+      %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "market_symbol"}
+        Symbol
+      = f.text_field :symbol, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "SM"
+      
+  .flex.flex-wrap.-mx-3.mb-6
+    .w-full.px-3.mb-6.md:mb-0{class: "md:w-1/2"}
+      %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "market_supply"}
+        Supply
+      = f.number_field :supply, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "1000"
+  
+    .w-full.px-3{class: "md:w-1/2"}
+      %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "grid-last-name"}
+        Market Cap
+      = f.number_field :market_cap, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "20000"
+  
+  .flex.flex-wrap.-mx-3.mb-6
+    .w-full.px-3
+      %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "grid-password"}
+        Description
+      = f.text_area :description, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "Something you could speak your heart out."
+  .flex.justify-between.w-full.px-3
+    .md:flex.md:items-center
+      %a.bg-gray-800.py-2.px-5.text-white.hover:bg-white.hover:text-indigo-900.sm:rounded-lg.float-right{href: markets_path} Back
+    %button.shadow.bg-indigo-600.hover:bg-indigo-400.focus:shadow-outline.focus:outline-none.text-white.font-bold.py-2.px-6.rounded{type: "submit"}
+      Save Market
+      
+/ Credit: Componentity.com
+%a.block{href: "https://componentity.com", target: "_blank"}
+-#%img.w-48.mx-auto.my-5{src: "http://codenawis.com/componentity/wp-content/uploads/2020/08/logo-componentity-%E2%80%93-9.png"}/

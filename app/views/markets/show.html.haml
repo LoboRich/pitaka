@@ -1,24 +1,50 @@
-%p#notice= notice
-
-%p
-  %b Logo:
-  = @market.logo
-%p
-  %b Name:
-  = @market.name
-%p
-  %b Symbol:
-  = @market.symbol
-%p
-  %b Description:
-  = @market.description
-%p
-  %b Buying price:
-  = @market.buying_price
-%p
-  %b Selling price:
-  = @market.selling_price
-
-= link_to 'Edit', edit_market_path(@market)
-\|
-= link_to 'Back', markets_path
+%section.md:container.md:mx-auto.bg-gray-100
+  #main.main-content.flex-1.mt-12.md:mt-2.pb-24.md:pb-5
+    .bg-gray-800.pt-3
+      .rounded-tl-3xl.bg-gradient-to-r.from-blue-900.to-gray-800.p-4.shadow.text-2xl.text-white
+        %h1.font-bold.pl-2 New Market
+  .flex.flex-col.mt-2.w-full.p-6.bg-gray-100
+    .-my-2.overflow-x-auto.sm:-mx-6.lg:-mx-8
+      .py-2.align-middle.inline-block.min-w-full.sm:px-6.lg:px-8
+        %body.text-gray-900.tracking-wider.leading-normal
+          .max-w-screen-md.mx-auto.p-5
+            = form_for @market do |f|
+              .flex.flex-wrap.-mx-3.mb-6.justify-center
+                .m-1.mr-2.w-24.h-24.relative.flex.justify-center.items-center.rounded-full.bg-gray-500.text-xl.text-white
+                  %img.rounded-full{src: "#{@market.logo.to_s}"}/
+                  -#.absolute.right-0.bottom-0.w-3.h-3.rounded-full.bg-green-500
+              .flex.flex-wrap.-mx-3.mb-6
+                .w-full.px-3.mb-6.md:mb-0{class: "md:w-1/2"}
+                  %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "market_name"}
+                    Name
+                  = f.text_field :name, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", disabled: true
+                  -#%p.text-red-500.text-xs.italic Please fill out this field.
+                .w-full.px-3{class: "md:w-1/2"}
+                  %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "market_symbol"}
+                    Symbol
+                  = f.text_field :symbol, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", disabled: true
+                  
+              .flex.flex-wrap.-mx-3.mb-6
+                .w-full.px-3.mb-6.md:mb-0{class: "md:w-1/2"}
+                  %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "market_supply"}
+                    Supply
+                  = f.number_field :supply, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", disabled: true
+              
+                .w-full.px-3{class: "md:w-1/2"}
+                  %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "grid-last-name"}
+                    Market Cap
+                  = f.number_field :market_cap, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", disabled: true
+              
+              .flex.flex-wrap.-mx-3.mb-6
+                .w-full.px-3
+                  %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "grid-password"}
+                    Description
+                  = f.text_area :description, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "Something you could speak your heart out."
+              .flex.justify-between.w-full.px-3
+                .md:flex.md:items-center
+                  %a.bg-gray-800.py-2.px-5.text-white.hover:bg-white.hover:text-indigo-900.sm:rounded-lg.float-right{href: markets_path} Back
+                %a.bg-indigo-600.py-2.px-5.text-white.hover:bg-white.hover:text-indigo-900.sm:rounded-lg.float-right{href: edit_market_path(@market)} Edit
+                  
+            / Credit: Componentity.com
+            %a.block{href: "https://componentity.com", target: "_blank"}
+            -#%img.w-48.mx-auto.my-5{src: "http://codenawis.com/componentity/wp-content/uploads/2020/08/logo-componentity-%E2%80%93-9.png"}/
