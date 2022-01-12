@@ -10,7 +10,7 @@ class Account < ApplicationRecord
   after_create :create_wallet, :create_log, :create_portfolio
 
   def create_wallet
-      Wallet.create(account: self, balance: "100k")
+      Wallet.create(account: self, balance: "100")
   end
 
   def create_log 

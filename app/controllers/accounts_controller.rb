@@ -13,8 +13,13 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1 or /accounts/1.json
   def show
-    @account = current_user.account
-    @portfolio = current_user.account.portfolio.market_portfolios
+    unless current_user.role == 'admin'
+      @account = current_user.account
+      @portfolio = current_user.account.portfolio.market_portfolios
+    else
+      @account = Account.find(params[:id])
+      @portfolio = @account.portfolio.market_portfolios
+    end
   end
 
   # GET /accounts/new
@@ -26,6 +31,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
+    @roles = Account.roles.reject{|x| x == 'admin'}
   end
 
   # POST /accounts or /accounts.json

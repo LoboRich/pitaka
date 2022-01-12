@@ -60,51 +60,99 @@
   #main.main-content.flex-1.bg-gray-100.mt-12.md:mt-2.pb-24.md:pb-5
     .bg-gray-800.pt-3
       .rounded-tl-3xl.bg-gradient-to-r.from-blue-900.to-gray-800.p-4.shadow.text-2xl.text-white
-        %h1.font-bold.pl-2 Portfolio
-    .flex.flex-wrap
-      .w-full.p-6{class: "md:w-1/2 xl:w-1/3"}
-        .bg-gradient-to-b.from-yellow-200.to-yellow-100.border-b-4.border-yellow-600.rounded-lg.shadow-xl.p-5
-          .flex.flex-row.items-center
-            .flex-shrink.pr-4
-              .rounded-full.p-5.bg-yellow-600
-                %i.fas.fa-exchange-alt.fa-2x.fa-inverse
-            .flex-1.text-right.md:text-center
-              %h2.font-bold.uppercase.text-gray-600 Total stocks
-              %p.font-bold.text-3xl
-                2
-                -# %span.text-yellow-600
-                -#   %i.fas.fa-exchange-alt
+        %h1.font-bold.pl-2 Profile
+      
+    .flex.flex-col.mt-2.w-full.p-3
+      .md:flex.no-wrap.md:-mx-2
+        .w-full.md:mx-2{class: "md:w-2/12"}
+          .bg-white.p-3.border-t-4.border-gray-800.rounded-full
+            .image.overflow-hidden.rounded-full
+              %img.h-40.w-full.mx-auto{alt: "No photo available", src: "#{@account.img.to_s}"}/
+            -#%h1.text-gray-900.font-bold.text-xl.leading-8.my-1 Jane Doe 
+            -#%h3.text-gray-600.font-lg.text-semibold.leading-6 Owner at Her Company Inc.
+          
+        .w-full.mx-2{class: "md:w-10/12"}
+          .bg-white.p-3.shadow-sm.rounded-sm.rounded
+            .flex.items-center.space-x-2.font-semibold.text-gray-900.leading-8
+              %span{clas: "text-green-500"}
+                %a.fas.fa-pen.py-2.px-2.bg-blue-900.text-white.hover:bg-white.hover:text-indigo-900.sm:rounded-lg{href: edit_account_path(@account)}
 
-      .w-full.p-6{class: "md:w-1/2 xl:w-1/3"}
-        .bg-gradient-to-b.from-pink-200.to-pink-100.border-b-4.border-pink-500.rounded-lg.shadow-xl.p-5
-          .flex.flex-row.items-center
-            .flex-shrink.pr-4
-              .rounded-full.p-5.bg-pink-600
-                %i.fas.fa-wallet.fa-2x.fa-inverse
-            .flex-1.text-right.md:text-center
-              %h2.font-bold.uppercase.text-gray-600 Total Balance
-              %p.font-bold.text-3xl
-                249
-                -# %span.text-pink-500
-                -#   %i.fas.fa-exchange-alt
-        
-      .w-full.p-6{class: "md:w-1/2 xl:w-1/3"}
-        .bg-gradient-to-b.from-green-200.to-green-100.border-b-4.border-green-600.rounded-lg.shadow-xl.p-5
-          .flex.flex-row.items-center
-            .flex-shrink.pr-4
-              .rounded-full.p-5.bg-green-600
-                %i.fa.fa-wallet.fa-2x.fa-inverse
-            .flex-1.text-right.md:text-center
-              %h2.font-bold.uppercase.text-gray-600 Total Revenue
-              %p.font-bold.text-3xl
-                $3249
-                -# %span.text-green-500
-                -#   %i.fas.fa-caret-up
-    .flex.flex-col.mt-2.w-full.p-6
+              %span.tracking-wide About
+            .text-gray-700
+              .grid.md:grid-cols-2.text-sm
+                .grid.grid-cols-2
+                  .px-4.py-2.font-semibold First Name
+                  .px-4.py-2
+                    = @account.firstname
+                .grid.grid-cols-2
+                  .px-4.py-2.font-semibold Last Name
+                  .px-4.py-2
+                    = @account.lastname
+                .grid.grid-cols-2
+                  .px-4.py-2.font-semibold Role
+                  .px-4.py-2
+                    = @account.role
+                .grid.grid-cols-2
+                  .px-4.py-2.font-semibold Contact No.
+                  .px-4.py-2
+                    = @account.contact_number
+                .grid.grid-cols-2
+                  .px-4.py-2.font-semibold Address
+                  .px-4.py-2
+                    = @account.address
+                .grid.grid-cols-2
+                  .px-4.py-2.font-semibold Email.
+                  .px-4.py-2
+                    %a.text-blue-800
+                      = @account.user.email
+    - unless current_user.role == 'admin'
+      .flex.flex-wrap
+        .w-full.p-6{class: "md:w-1/2 xl:w-1/3"}
+          .bg-gradient-to-b.from-yellow-200.to-yellow-100.border-b-4.border-yellow-600.rounded-lg.shadow-xl.p-5
+            .flex.flex-row.items-center
+              .flex-shrink.pr-4
+                .rounded-full.p-5.bg-yellow-600
+                  %i.fas.fa-exchange-alt.fa-2x.fa-inverse
+              .flex-1.text-right.md:text-center
+                %h2.font-bold.uppercase.text-gray-600 Total stocks
+                %p.font-bold.text-3xl
+                  2
+                  -# %span.text-yellow-600
+                  -#   %i.fas.fa-exchange-alt
+
+        .w-full.p-6{class: "md:w-1/2 xl:w-1/3"}
+          .bg-gradient-to-b.from-pink-200.to-pink-100.border-b-4.border-pink-500.rounded-lg.shadow-xl.p-5
+            .flex.flex-row.items-center
+              .flex-shrink.pr-4
+                .rounded-full.p-5.bg-pink-600
+                  %i.fas.fa-wallet.fa-2x.fa-inverse
+              .flex-1.text-right.md:text-center
+                %h2.font-bold.uppercase.text-gray-600 Total Balance
+                %p.font-bold.text-3xl
+                  249
+                  -# %span.text-pink-500
+                  -#   %i.fas.fa-exchange-alt
+          
+        .w-full.p-6{class: "md:w-1/2 xl:w-1/3"}
+          .bg-gradient-to-b.from-green-200.to-green-100.border-b-4.border-green-600.rounded-lg.shadow-xl.p-5
+            .flex.flex-row.items-center
+              .flex-shrink.pr-4
+                .rounded-full.p-5.bg-green-600
+                  %i.fa.fa-wallet.fa-2x.fa-inverse
+              .flex-1.text-right.md:text-center
+                %h2.font-bold.uppercase.text-gray-600 Total Revenue
+                %p.font-bold.text-3xl
+                  $3249
+                  -# %span.text-green-500
+                  -#   %i.fas.fa-caret-up
+    
+                
+    .flex.flex-col.mt-2.w-full.p-3
       .flex.flex-col
         .-my-2.overflow-x-auto.sm:-mx-6.lg:-mx-8
           .py-2.align-middle.inline-block.min-w-full.sm:px-6.lg:px-8
             .shadow.overflow-hidden.border-b.border-gray-200.sm:rounded-lg
+              %h1.font-bold.pl-2.p-3 Portfolio
               %table.min-w-full.divide-y.divide-gray-200
                 %thead.bg-gray-50
                   %tr

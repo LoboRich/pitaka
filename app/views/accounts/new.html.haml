@@ -1,5 +1,11 @@
-%h1 New account
-
-= render 'form'
-
-= link_to 'Back', accounts_path
+%section.md:container.md:mx-auto.bg-gray-100
+  #main.main-content.flex-1.mt-12.md:mt-2.pb-24.md:pb-5
+    .bg-gray-800.pt-3
+      .rounded-tl-3xl.bg-gradient-to-r.from-blue-900.to-gray-800.p-4.shadow.text-2xl.text-white
+        %h1.font-bold.pl-2 New Account
+  .flex.flex-col.mt-2.w-full.p-6.bg-gray-100
+    .-my-2.overflow-x-auto.sm:-mx-6.lg:-mx-8
+      .py-2.align-middle.inline-block.min-w-full.sm:px-6.lg:px-8
+        %body.text-gray-900.tracking-wider.leading-normal
+          .max-w-screen-md.mx-auto.p-5
+            = render 'form'
