@@ -27,7 +27,7 @@ class MarketsController < ApplicationController
 
     respond_to do |format|
       if @market.save
-        format.html { redirect_to @market, notice: "Market was successfully created." }
+        format.html { redirect_to @market, notice = "Market was successfully created." }
         format.json { render :show, status: :created, location: @market }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class MarketsController < ApplicationController
   def update
     respond_to do |format|
       if @market.update(market_params)
-        format.html { redirect_to @market, success: "Market was successfully updated." }
+        format.html { redirect_to @market, notice: "Market was successfully updated." }
         format.json { render :show, status: :ok, location: @market }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class MarketsController < ApplicationController
   def destroy
     @market.destroy
     respond_to do |format|
-      format.html { redirect_to markets_url, success: "Market was successfully destroyed." }
+      format.html { redirect_to markets_url, notice: "Market was successfully destroyed." }
       format.json { head :no_content }
     end
   end
