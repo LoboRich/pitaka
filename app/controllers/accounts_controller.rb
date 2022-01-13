@@ -16,6 +16,7 @@ class AccountsController < ApplicationController
     unless current_user.role == 'admin'
       @account = current_user.account
       @portfolio = current_user.account.portfolio.market_portfolios
+      @balance = current_user.account.wallet.balance
     else
       @account = Account.find(params[:id])
       @portfolio = @account.portfolio.market_portfolios
