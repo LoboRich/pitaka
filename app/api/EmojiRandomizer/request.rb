@@ -1,8 +1,8 @@
 require 'rest-client'
 
-module QuoteRandomizer
+module EmojiRandomizer
     class Request
-        BASE_URL = 'quotes.rest/'
+        BASE_URL = 'https://emojihub.herokuapp.com/api'
         TOKEN = 'token'
 
         def self.call(http_method:, endpoint:)
