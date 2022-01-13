@@ -18,7 +18,7 @@ gem 'hamlit-rails'
 gem 'pry'
 gem 'carrierwave', '~> 2.0'
 gem "pundit"
-
+gem "rest-client"
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
