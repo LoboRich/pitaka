@@ -66,9 +66,9 @@ class MarketsController < ApplicationController
       Market.deduct_stocks(@market, params['stocks'])
       if MarketPortfolio.duplicate?(@market.id, current_user.account.portfolio)
         market = current_user.market_portfolios.find_by(market_id: @market.id)
-        market.update(stocks: market.stocks.to_f + params[:stocks].to_f, price: market.price.to_f + params[:price])
+        market.update(stocks: market.stocks.to_f + params[:stocks].to_f, price: market.price.to_f + params[:price].to_f)
       else
-        MarketPortfolio.create(portfolio_id: current_user.account.portfolio.id,market_id: @market.id, price: params[:price], stocks: params[:stocks])
+        MarketPortfolio.create(portfolio_id: current_user.account.portfolio.id,market_id: @market.id, price: params[:price].to_f, stocks: params[:stocks].to_f)
       end
       redirect_to markets_url, notice: "Successfully purchased a stock."
     else
@@ -78,7 +78,12 @@ class MarketsController < ApplicationController
   end
 
   def sell
-    
+    Market.add_stocks(@market, params['stocks'])
+    Wallet.add(current_user.account.wallet, params['price'])
+    market_portfolio = current_user.market_portfolios.find_by(market_id: @market.id)
+    market_portfolio.update(stocks: market_portfolio.stocks.to_f - params[:stocks].to_f, price: market_portfolio.price.to_f - params[:price].to_f)
+    #market_portfolio.stocks == 0 ? market_portfolio.destroy
+    redirect_to markets_url, notice: "Successfully sold a stock."
   end
 
   private

@@ -52,9 +52,9 @@
                         - if policy(:market).buy? && policy(:market).sell?
                           %div
                             %a.bg-green-600.py-2.px-5.text-white.rounded.modal-open{"data-target" => "buy-#{market.id}", "data-toggle" => "modal"} BUY
-                            %a.bg-yellow-600.py-2.px-5.text-white.rounded.modal-open{"data-target" => "sell-#{market.id}", "data-toggle" => "modal"} SELL
+                            -#%a.bg-yellow-600.py-2.px-5.text-white.rounded.modal-open{"data-target" => "sell-#{market.id}", "data-toggle" => "modal"} SELL
                           = render :partial => 'buy_form', :locals => { :info => market }
-                          = render :partial => 'sell_form', :locals => { :info => market }
+                          -#= render :partial => 'sell_form', :locals => { :info => market }
                                 
                         - if policy(:market).actions?
                           = link_to 'Show', market

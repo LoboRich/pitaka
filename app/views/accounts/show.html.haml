@@ -93,7 +93,7 @@
                         - if policy(:market).buy? && policy(:market).sell?
                           %div
                             %a.bg-yellow-600.py-2.px-5.text-white.rounded.modal-open{"data-target" => "sell-#{market_portfolio.market.id}", "data-toggle" => "modal"} SELL
-                          = render :partial => 'markets/sell_form', :locals => { :info => market_portfolio.market }
+                          = render :partial => 'markets/sell_form', :locals => { :info => market_portfolio }
 :javascript
   var table = $('#example').DataTable( {
     responsive: true

@@ -9,6 +9,10 @@ class Market < ApplicationRecord
     market.update!(supply: market.supply - stocks.to_f)
   end
 
+  def self.add_stocks(market, stocks)
+    market.update!(supply: market.supply + stocks.to_f)
+  end
+
   def self.sufficient_supply?(market, stocks)
     market.supply > stocks.to_f
   end
