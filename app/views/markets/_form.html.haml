@@ -8,23 +8,23 @@
     .w-full.px-3.mb-6.md:mb-0{class: "md:w-1/2"}
       %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "market_name"}
         Name
-      = f.text_field :name, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "San Miguel"
+      = f.text_field :name, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "San Miguel", required: true
       -#%p.text-red-500.text-xs.italic Please fill out this field.
     .w-full.px-3{class: "md:w-1/2"}
       %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "market_symbol"}
         Symbol
-      = f.text_field :symbol, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "SM"
+      = f.text_field :symbol, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "SM", required: true
       
   .flex.flex-wrap.-mx-3.mb-6
     .w-full.px-3.mb-6.md:mb-0{class: "md:w-1/2"}
       %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "market_supply"}
         Supply
-      = f.number_field :supply, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "1000"
+      = f.number_field :supply, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "1000", required: true
   
     .w-full.px-3{class: "md:w-1/2"}
       %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "grid-last-name"}
         Market Cap
-      = f.number_field :market_cap, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "20000"
+      = f.number_field :market_cap, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", placeholder: "20000", required: true
   
   .flex.flex-wrap.-mx-3.mb-6
     .w-full.px-3

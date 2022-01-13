@@ -1,5 +1,6 @@
 class Account < ApplicationRecord
   mount_uploader :img, AvatarUploader
+  validates :firstname, :lastname, :role, :email, :password, presence: true
   has_one :user
   has_one :wallet
   has_one :portfolio
