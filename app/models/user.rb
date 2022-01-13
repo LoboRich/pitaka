@@ -8,4 +8,13 @@ class User < ApplicationRecord
   def role
     self.account.role
   end
+
+  def portfolio
+    self.account.portfolio
+  end
+
+  def market_portfolios
+    self.account.portfolio.market_portfolios
+  end
+
 end

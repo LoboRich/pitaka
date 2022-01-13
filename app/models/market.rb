@@ -12,4 +12,8 @@ class Market < ApplicationRecord
   def self.sufficient_supply?(market, stocks)
     market.supply > stocks.to_f
   end
+
+  def price
+    self.market_cap / self.supply
+  end
 end

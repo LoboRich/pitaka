@@ -1,29 +1,4 @@
-
--#     %h1 Listing market_portfolios
-
--#     %table
--#       %thead
--#         %tr
--#           %th Market
--#           %th Stocks
--#           %th Revenue
--#           %th
--#           %th
--#           %th
-
--#       %tbody
--#         - @portfolio.each do |market_portfolio|
--#           %tr
--#             %td= market_portfolio.market.name
--#             %td= market_portfolio.stocks
--#             %td= market_portfolio.revenue
--#             %td= link_to 'Show', market_portfolio
--#             %td= link_to 'Edit', edit_market_portfolio_path(market_portfolio)
--#             %td= link_to 'Destroy', market_portfolio, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
--#     %br
-
--#     = link_to 'New Market portfolio', new_market_portfolio_path
+= render :partial => 'layouts/table_links'
 %section.md:container.md:mx-auto
   #main.main-content.flex-1.bg-gray-100.mt-12.md:mt-2.pb-24.md:pb-5
     .bg-gray-800.pt-3
@@ -76,19 +51,21 @@
     - unless current_user.role == 'admin'
       = render 'stats_counts'
 
-    .flex.flex-col.mt-2.w-full.p-3
+    .flex.flex-col.mt-2.w-full.p-6
       .flex.flex-col
         .-my-2.overflow-x-auto.sm:-mx-6.lg:-mx-8
           .py-2.align-middle.inline-block.min-w-full.sm:px-6.lg:px-8
-            .shadow.overflow-hidden.border-b.border-gray-200.sm:rounded-lg
+            %body.bg-gray-100.text-gray-900.tracking-wider.leading-normal
               %h1.font-bold.pl-2.p-3 Portfolio 
-              %table.min-w-full.divide-y.divide-gray-200
-                %thead.bg-gray-50
+              %table#example.stripe.hover{style: "width:100%; padding-top: 1em;  padding-bottom: 1em;"}
+                %thead
                   %tr
                     %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
                       Market
                     %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
                       Stocks
+                    %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
+                      Price
                     %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
                       Revenue
                     %th.relative.px-6.py-3{scope: "col"}
@@ -105,15 +82,66 @@
                               = market_portfolio.market.symbol
                             .text-sm.text-gray-500
                               = market_portfolio.market.name
-                      
+                      %td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
+                        = market_portfolio.stocks
                       %td.px-6.py-4.whitespace-nowrap
                         %span.px-2.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-green-100.text-green-800
-                          = market_portfolio.stocks
+                          = market_portfolio.price
                       %td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
-                        = market_portfolio.revenue
+                        = "#{market_portfolio.price - market_portfolio.market.price}" rescue nil
                       %td.px-6.py-4.whitespace-nowrap.text-right.text-sm.font-medium
-                        -#%a.text-indigo-600.hover:text-indigo-900{href: "#"} Edit
+                        - if policy(:market).buy? && policy(:market).sell?
+                          %div
+                            %a.bg-yellow-600.py-2.px-5.text-white.rounded.modal-open{"data-target" => "sell-#{market_portfolio.market.id}", "data-toggle" => "modal"} SELL
+                          = render :partial => 'markets/sell_form', :locals => { :info => market_portfolio.market }
 :javascript
+  var table = $('#example').DataTable( {
+    responsive: true
+  } )
+  .columns.adjust()
+  .responsive.recalc();
+  
+  var openmodal = document.querySelectorAll('.modal-open')
+    let selectedModalTargetId = ''
+    for (var i = 0; i < openmodal.length; i++) {
+      openmodal[i].addEventListener('click', function(event){
+        selectedModalTargetId = event.target.attributes.getNamedItem('data-target').value
+        event.preventDefault()
+        toggleModal()
+      })
+    }
+
+  const overlay = document.querySelector('.modal-overlay')
+  overlay.addEventListener('click', toggleModal)
+
+  var closemodal = document.querySelectorAll('.modal-close')
+  for (var i = 0; i < closemodal.length; i++) {
+    closemodal[i].addEventListener('click', toggleModal)
+  }
+
+  document.onkeydown = function(evt) {
+    evt = evt || window.event
+    var isEscape = false
+    if ("key" in evt) {
+      isEscape = (evt.key === "Escape" || evt.key === "Esc")
+    } else {
+      isEscape = (evt.keyCode === 27)
+    }
+    if (isEscape && document.body.classList.contains('modal-active')) {
+      toggleModal()
+    }
+  }
+
+  function toggleModal () {
+    if(!selectedModalTargetId) {
+      return
+    }
+    const body = document.querySelector('body')
+    const modal = document.getElementById(selectedModalTargetId)
+    modal.classList.toggle('opacity-0')
+    modal.classList.toggle('pointer-events-none')
+    body.classList.toggle('modal-active')
+  }
   /*Toggle dropdown list*/
   function toggleDD(myDropMenu) {
       document.getElementById(myDropMenu).classList.toggle("invisible");

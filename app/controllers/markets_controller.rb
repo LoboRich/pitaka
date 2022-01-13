@@ -64,17 +64,21 @@ class MarketsController < ApplicationController
     if balance && stocks
       Wallet.deduct(current_user.account.wallet, params['price'])
       Market.deduct_stocks(@market, params['stocks'])
-      #check if a market is already in your portfolio, if so update the stocks else create new
-      MarketPortfolio.create(portfolio_id: current_user.account.portfolio.id,market_id: @market.id, stocks: params[:stocks])
-      redirect_to markets_url, notice: "Wallet balance is not enough."
-    else
+      if MarketPortfolio.duplicate?(@market.id, current_user.account.portfolio)
+        market = current_user.market_portfolios.find_by(market_id: @market.id)
+        market.update(stocks: market.stocks.to_f + params[:stocks].to_f, price: market.price.to_f + params[:price])
+      else
+        MarketPortfolio.create(portfolio_id: current_user.account.portfolio.id,market_id: @market.id, price: params[:price], stocks: params[:stocks])
+      end
       redirect_to markets_url, notice: "Successfully purchased a stock."
+    else
+      redirect_to markets_url, notice: "Wallet balance is not enough."
     end
     
   end
 
   def sell
-    wallet = current_user.account.wallet
+    
   end
 
   private
