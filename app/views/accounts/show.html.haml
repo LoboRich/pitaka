@@ -1,36 +1,4 @@
 
-
--#         %p
--#       %b Img:
--#       = @account.img
--#     %p
--#       %b Role:
--#       = @account.role
--#     %p
--#       %b Firstname:
--#       = @account.firstname
--#     %p
--#       %b Lastname:
--#       = @account.lastname
--#     %p
--#       %b Address:
--#       = @account.address
--#     %p
--#       %b Contact number:
--#       = @account.contact_number
--#     %p
--#       %b Is verified:
--#       = @account.is_verified
-
--#     %p
--#       %b Wallet:
--#       = @account.wallet.balance
-
--#     = link_to 'Edit', edit_account_path(@account)
--#     \|
--#     = link_to 'Back', accounts_path
-
-
 -#     %h1 Listing market_portfolios
 
 -#     %table
@@ -113,42 +81,38 @@
         .-my-2.overflow-x-auto.sm:-mx-6.lg:-mx-8
           .py-2.align-middle.inline-block.min-w-full.sm:px-6.lg:px-8
             .shadow.overflow-hidden.border-b.border-gray-200.sm:rounded-lg
-              %h1.font-bold.pl-2.p-3 Portfolio
+              %h1.font-bold.pl-2.p-3 Portfolio 
               %table.min-w-full.divide-y.divide-gray-200
                 %thead.bg-gray-50
                   %tr
                     %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
-                      Name
+                      Market
                     %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
-                      Title
+                      Stocks
                     %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
-                      Status
-                    %th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider{scope: "col"}
-                      Role
+                      Revenue
                     %th.relative.px-6.py-3{scope: "col"}
                       %span.sr-only Edit
                 %tbody.bg-white.divide-y.divide-gray-200
-                  %tr
-                    %td.px-6.py-4.whitespace-nowrap
-                      .flex.items-center
-                        .flex-shrink-0.h-10.w-10
-                          %img.h-10.w-10.rounded-full{alt: "", src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"}/
-                        .ml-4
-                          .text-sm.font-medium.text-gray-900
-                            Jane Cooper
-                          .text-sm.text-gray-500
-                            jane.cooper@example.com
-                    %td.px-6.py-4.whitespace-nowrap
-                      .text-sm.text-gray-900 Regional Paradigm Technician
-                      .text-sm.text-gray-500 Optimization
-                    %td.px-6.py-4.whitespace-nowrap
-                      %span.px-2.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-green-100.text-green-800
-                        Active
-                    %td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
-                      Admin
-                    %td.px-6.py-4.whitespace-nowrap.text-right.text-sm.font-medium
-                      %a.text-indigo-600.hover:text-indigo-900{href: "#"} Edit
-                  / More people...
+                  - @portfolio.each do |market_portfolio|
+                    %tr
+                      %td.px-6.py-4.whitespace-nowrap
+                        .flex.items-center
+                          .flex-shrink-0.h-10.w-10
+                            %img.h-10.w-10.rounded-full{alt: "", src: "#{market_portfolio.market.logo.to_s}"}/
+                          .ml-4
+                            .text-sm.font-medium.text-gray-900
+                              = market_portfolio.market.symbol
+                            .text-sm.text-gray-500
+                              = market_portfolio.market.name
+                      
+                      %td.px-6.py-4.whitespace-nowrap
+                        %span.px-2.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-green-100.text-green-800
+                          = market_portfolio.stocks
+                      %td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
+                        = market_portfolio.revenue
+                      %td.px-6.py-4.whitespace-nowrap.text-right.text-sm.font-medium
+                        -#%a.text-indigo-600.hover:text-indigo-900{href: "#"} Edit
 :javascript
   /*Toggle dropdown list*/
   function toggleDD(myDropMenu) {

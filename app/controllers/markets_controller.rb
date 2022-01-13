@@ -4,6 +4,8 @@ class MarketsController < ApplicationController
   # GET /markets or /markets.json
   def index
     @markets = Market.all
+    @portfolio = current_user.account.portfolio.market_portfolios
+    @balance = current_user.account.wallet.balance
   end
 
   # GET /markets/1 or /markets/1.json
@@ -38,7 +40,7 @@ class MarketsController < ApplicationController
   def update
     respond_to do |format|
       if @market.update(market_params)
-        format.html { redirect_to @market, notice: "Market was successfully updated." }
+        format.html { redirect_to @market, success: "Market was successfully updated." }
         format.json { render :show, status: :ok, location: @market }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +53,7 @@ class MarketsController < ApplicationController
   def destroy
     @market.destroy
     respond_to do |format|
-      format.html { redirect_to markets_url, notice: "Market was successfully destroyed." }
+      format.html { redirect_to markets_url, success: "Market was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -62,10 +64,13 @@ class MarketsController < ApplicationController
     if balance && stocks
       Wallet.deduct(current_user.account.wallet, params['price'])
       Market.deduct_stocks(@market, params['stocks'])
-      MarketPortfolio.create(portfolio_id: current_user.account.portfolio.id, market_id: @market.id, stocks: params[:stocks])
-    else
+      #check if a market is already in your portfolio, if so update the stocks else create new
+      MarketPortfolio.create(portfolio_id: current_user.account.portfolio.id,market_id: @market.id, stocks: params[:stocks])
       redirect_to markets_url, notice: "Wallet balance is not enough."
+    else
+      redirect_to markets_url, notice: "Successfully purchased a stock."
     end
+    
   end
 
   def sell
