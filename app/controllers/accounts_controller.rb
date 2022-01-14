@@ -15,8 +15,10 @@ class AccountsController < ApplicationController
   def show
     unless current_user.role == 'admin'
       @account = current_user.account
-      @portfolio = current_user.account.portfolio.market_portfolios
+      @portfolio = current_user.account.portfolio
+      @market_portfolios = @portfolio.market_portfolios
       @balance = current_user.account.wallet.balance
+      @revenue = MarketPortfolio.revenue(@portfolio)
     else
       @account = Account.find(params[:id])
       @portfolio = @account.portfolio.market_portfolios

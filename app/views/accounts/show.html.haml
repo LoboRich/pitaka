@@ -71,7 +71,7 @@
                     %th.relative.px-6.py-3{scope: "col"}
                       %span.sr-only Edit
                 %tbody.bg-white.divide-y.divide-gray-200
-                  - @portfolio.each do |market_portfolio|
+                  - @market_portfolios.each do |market_portfolio|
                     %tr
                       %td.px-6.py-4.whitespace-nowrap
                         .flex.items-center
@@ -90,7 +90,7 @@
                       %td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
                         = "#{market_portfolio.price - market_portfolio.market.price}" rescue nil
                       %td.px-6.py-4.whitespace-nowrap.text-right.text-sm.font-medium
-                        - if policy(:market).buy? && policy(:market).sell?
+                        - if policy(:market).buy? && policy(:market).sell? && market_portfolio.stocks > 0
                           %div
                             %a.bg-yellow-600.py-2.px-5.text-white.rounded.modal-open{"data-target" => "sell-#{market_portfolio.market.id}", "data-toggle" => "modal"} SELL
                           = render :partial => 'markets/sell_form', :locals => { :info => market_portfolio }

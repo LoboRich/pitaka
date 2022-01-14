@@ -8,7 +8,7 @@
         .flex-1.text-right.md:text-center
           %h2.font-bold.uppercase.text-gray-600 Total stocks
           %p.font-bold.text-3xl
-            = @portfolio.count
+            = @market_portfolios.count
             -# %span.text-yellow-600
             -#   %i.fas.fa-exchange-alt
   
@@ -34,6 +34,6 @@
         .flex-1.text-right.md:text-center
           %h2.font-bold.uppercase.text-gray-600 Total Revenue
           %p.font-bold.text-3xl
-            ₱3249
+            = "₱#{@revenue}"
             -# %span.text-green-500
             -#   %i.fas.fa-caret-up

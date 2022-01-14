@@ -4,8 +4,10 @@ class MarketsController < ApplicationController
   # GET /markets or /markets.json
   def index
     @markets = Market.all
-    @portfolio = current_user.account.portfolio.market_portfolios
     @balance = current_user.account.wallet.balance
+    @portfolio = current_user.account.portfolio
+    @market_portfolios = @portfolio.market_portfolios
+    @revenue = MarketPortfolio.revenue(@portfolio)
   end
 
   # GET /markets/1 or /markets/1.json
