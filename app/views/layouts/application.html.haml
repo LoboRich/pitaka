@@ -8,12 +8,14 @@
     %meta{content: "name", name: "author"}/
     %meta{content: "description here", name: "description"}/
     %meta{content: "keywords,here", name: "keywords"}/
-    %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"} 
+    -#%script{src: "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"} 
     %link{href: "https://use.fontawesome.com/releases/v5.3.1/css/all.css", rel: "stylesheet"}/
     %link{href: "https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css", rel: "stylesheet"}/
     %link{href: "https://afeld.github.io/emoji-css/emoji.css", rel: "stylesheet"}/
     %link{href: "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css", rel: "stylesheet"}/
-
+    %link{href: "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css", rel: "stylesheet"}/
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"}
   %body.bg-gray-800.font-sans.leading-normal.tracking-normal.mt-12
     - if user_signed_in?
       = render :partial => 'layouts/header'
@@ -23,4 +25,8 @@
           = yield
     - else
       = yield
-    %p#notice = notice
+    - if flash.any?
+      %script(type="text/javascript")
+        - flash.each do |key, value|
+          - type = key.to_s.gsub('alert', 'error').gsub('notice', 'success');
+          toastr.#{type}('#{value}')
