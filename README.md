@@ -1,7 +1,6 @@
-# Hi there 👋
+# ₱TAKA
 
-This repo serves as the main repo for our Rails Projects. 
-
+This project is a forked project from the main repo https://github.com/avionschool/rails-base-project. ₱TAKA's primary function is to buy and sell stocks from the stock market.
 
 #### Version
 
@@ -14,8 +13,10 @@ This repo serves as the main repo for our Rails Projects.
 
 #### Installation
 
-Fork this repo:
+Fork the main repo:
 ![image](https://user-images.githubusercontent.com/9253881/111437757-6c527f00-873e-11eb-8d0a-862e4158f4ab.png)
+
+https://github.com/avionschool/rails-base-project
 
 Then, clone your forked repo to your machine
 ```
@@ -55,4 +56,8 @@ Then, clone your forked repo to your machine
 <img width="1244" alt="Screen Shot 2021-03-23 at 10 11 12 PM" src="https://user-images.githubusercontent.com/9253881/112160530-36713700-8c25-11eb-9f00-d69a3a36343f.png">
 
 
-
+### Collaborators
+1. Kim Carl Casas
+    - https://github.com/kbcacas  
+1. Richelle Lobo
+    - https://github.com/https://github.com/kbcacas 
