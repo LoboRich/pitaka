@@ -1,5 +1,5 @@
-%div{class:"fixed bg-contain w-full h-full"}
-  =image_tag "bg.jpg", class:"absolute w-full h-full -z-50"
+%div{class:"absolute bg-cover w-screen h-screen overflow-y-hidden", style: "transform: translatey(-3rem);"}
+  =image_tag "bg.jpg", class:"absolute w-screen h-screen -z-50"
 %div{class:"flex flex-row h-screen w-screen grow justify-around items-center"} 
   %div{class:"flex flex-row z-50 grow flex flex-col"}
     %h1{class:"text-9xl text-yellow-300 relative bottom-20 font-extrabold"} ₱TAKA
@@ -25,5 +25,3 @@
               = f.label :remember_me, class:"text-gray-700 text-sm font-bold"
         .actions{class:"flex flex-row justify-center"}
           = f.submit "Log in", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
-      %div{class:"flex flex-col"}
-        = link_to "Sign up", new_account_path, class:"block text-gray-700 text-sm font-bold hover:text-color-blue"
