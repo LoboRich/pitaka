@@ -1,13 +1,12 @@
 require 'rest-client'
 
-module EmojiRandomizer
+module ActivitySuggestion
     class Request
-        BASE_URL = 'https://emojihub.herokuapp.com/api'
+        BASE_URL = 'https://www.boredapi.com/api'
         def self.call(http_method:, endpoint:)
             result = RestClient::Request.execute(
                 method: http_method,
                 url: "#{BASE_URL}#{endpoint}",
-
                 headers: {'Content-Type'=> 'application/json'}
             )
             JSON.parse(result)
