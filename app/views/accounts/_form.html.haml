@@ -40,12 +40,12 @@
   .flex.flex-wrap.-mx-3.mb-6
     = f.fields_for :user do |u|
       .w-full.px-3.mb-6.md:mb-0{class: "md:w-1/2"}
-        %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_img"}
+        %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_user_attributes_email"}
           Email
         = u.email_field :email, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", required: true
         -#%p.text-red-500.text-xs.italic Please fill out this field.
       .w-full.px-3{class: "md:w-1/2"}
-        %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_role"}
+        %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_user_attributes_password"}
           Password
         = u.password_field :password, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", required: true
       = u.hidden_field :id, value: u.object.id

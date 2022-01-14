@@ -34,7 +34,6 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
-    @account.build_user
     @roles = Account.roles.reject{|x| x == 'admin'}
   end
 
