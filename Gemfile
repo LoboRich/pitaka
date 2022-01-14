@@ -19,6 +19,7 @@ gem 'pry'
 gem 'carrierwave', '~> 2.0'
 gem "pundit"
 gem "rest-client"
+gem "capybara"
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
