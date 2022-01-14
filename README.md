@@ -5,10 +5,10 @@ This project is a forked project from the main repo https://github.com/avionscho
 #### Version
 
 ```
-  Ruby 2.7.2
-  Rails 6.0.3.4
-  NodeJS 12.18.3
-  Yarn 1.22.4
+  rails 6.0.4.4
+  ruby 3.0.2
+  yarn 1.22.4
+  nodejs 12.18.3
 ```
 
 #### Installation

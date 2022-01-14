@@ -16,11 +16,13 @@ class MarketsController < ApplicationController
 
   # GET /markets/new
   def new
+    authorize Market, :new?
     @market = Market.new
   end
 
   # GET /markets/1/edit
   def edit
+    authorize Market, :edit?
   end
 
   # POST /markets or /markets.json
@@ -53,6 +55,7 @@ class MarketsController < ApplicationController
 
   # DELETE /markets/1 or /markets/1.json
   def destroy
+    authorize Market, :destroy?
     @market.destroy
     respond_to do |format|
       format.html { redirect_to markets_url, notice: "Market was successfully destroyed." }

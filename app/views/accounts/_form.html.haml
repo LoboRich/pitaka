@@ -9,13 +9,13 @@
     .w-full.px-3
       %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_img"}
         Image
-      = f.file_field :img, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+      = f.file_field :img, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", required: true
   
   .flex.flex-wrap.-mx-3.mb-6
     .w-full.px-3.mb-6.md:mb-0{class: "md:w-1/2"}
       %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_firstname"}
         Firstname
-      = f.text_field :firstname, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+      = f.text_field :firstname, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", required: true
       -#%p.text-red-500.text-xs.italic Please fill out this field.
     .w-full.px-3{class: "md:w-1/2"}
       %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_lastname"}
@@ -26,28 +26,28 @@
     .w-full.px-3.mb-6.md:mb-0{class: "md:w-1/2"}
       %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_contact_number"}
         Contact Number
-      = f.text_field :contact_number, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+      = f.text_field :contact_number, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", required: true
       -#%p.text-red-500.text-xs.italic Please fill out this field.
     .w-full.px-3{class: "md:w-1/2"}
       %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_role"}
         Role
-      = f.select :role, options_for_select(@roles, :selected => @account.role), {} ,{:required => "true", class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"}
+      = f.select :role, options_for_select([["broker", "broker"], ["trader", "trader"]], :selected => @account.role), {} ,{:required => "true", class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"}
   .flex.flex-wrap.-mx-3.mb-6
     .w-full.px-3
       %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_address"}
         Address
-      = f.text_area :address, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+      = f.text_area :address, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", required: true
   .flex.flex-wrap.-mx-3.mb-6
     = f.fields_for :user do |u|
       .w-full.px-3.mb-6.md:mb-0{class: "md:w-1/2"}
         %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_img"}
           Email
-        = u.email_field :email, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+        = u.email_field :email, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", required: true
         -#%p.text-red-500.text-xs.italic Please fill out this field.
       .w-full.px-3{class: "md:w-1/2"}
         %label.block.uppercase.tracking-wide.text-gray-700.text-xs.font-bold.mb-2{for: "account_role"}
           Password
-        = u.password_field :password, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+        = u.password_field :password, class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500", required: true
       = u.hidden_field :id, value: u.object.id
   .flex.justify-between.w-full.px-3
     .md:flex.md:items-center

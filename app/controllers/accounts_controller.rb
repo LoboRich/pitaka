@@ -34,13 +34,13 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
+    @account.build_user
     @roles = Account.roles.reject{|x| x == 'admin'}
   end
 
   # POST /accounts or /accounts.json
   def create
     @account = Account.new(account_params)
-
     respond_to do |format|
       if @account.save
         format.html { redirect_to @account, notice: "Account was successfully created." }
