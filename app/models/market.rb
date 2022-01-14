@@ -1,7 +1,7 @@
 class Market < ApplicationRecord
   mount_uploader :logo, AvatarUploader
-  validates :name, uniqueness: true
-  validates :symbol, :supply, :market_cap, presence: true
+  validates :name, :symbol, :supply, :market_cap, presence: true
+  validates_uniqueness_of :name
   has_many :market_portfolios
 
   def self.deduct_stocks(market, stocks)
