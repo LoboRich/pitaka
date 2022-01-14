@@ -7,6 +7,6 @@ class MarketPortfolio < ApplicationRecord
   end
 
   def self.revenue(portfolio)
-    portfolio.market_portfolios.map{|x| x.price - x.market.price}.sum
+    portfolio.market_portfolios.map{|x| x.price.to_f - x.market.price.to_f}.sum
   end
 end

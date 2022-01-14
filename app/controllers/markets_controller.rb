@@ -29,7 +29,7 @@ class MarketsController < ApplicationController
 
     respond_to do |format|
       if @market.save
-        format.html { redirect_to @market, notice = "Market was successfully created." }
+        format.html { redirect_to @market, notice: "Market was successfully created." }
         format.json { render :show, status: :created, location: @market }
       else
         format.html { render :new, status: :unprocessable_entity }
