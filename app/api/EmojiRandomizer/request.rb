@@ -7,6 +7,7 @@ module EmojiRandomizer
             result = RestClient::Request.execute(
                 method: http_method,
                 url: "#{BASE_URL}#{endpoint}",
+
                 headers: {'Content-Type'=> 'application/json'}
             )
             JSON.parse(result)
