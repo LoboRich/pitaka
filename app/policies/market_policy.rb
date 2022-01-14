@@ -20,6 +20,24 @@ class MarketPolicy < ApplicationPolicy
     ].include?(user.role)
   end
 
+  def new?
+    [
+      'admin'
+    ].include?(user.role)
+  end
+
+  def edit?
+    [
+      'admin'
+    ].include?(user.role)
+  end
+
+  def destroy?
+    [
+      'admin'
+    ].include?(user.role)
+  end
+
   def actions?
     [
       'admin'
