@@ -54,4 +54,4 @@ password: password [only 1 admin]
 1. Kimcarl Cacas
     - https://github.com/kbcacas  
 1. Richelle Lobo
-    - https://github.com/https://github.com/kbcacas 
+    - https://github.com/LoboRich
