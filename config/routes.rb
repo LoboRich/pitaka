@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     member do
       post :buy
       post :sell
+      post :remove_market
     end
   end
 
@@ -14,7 +15,12 @@ Rails.application.routes.draw do
     resources :portfolios do
       resources :market_portfolios
     end
+
+    member do
+      post :remove_account
+    end
   end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   namespace :api do 
     get '/today_quote', to: 'quotes#index'

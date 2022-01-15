@@ -12,6 +12,12 @@ class AccountPolicy < ApplicationPolicy
       ].include?(user.role)
     end
 
+    def new?
+      [
+        'admin'
+      ].include?(user.role)
+    end
+
     def actions?
       [
         'admin'

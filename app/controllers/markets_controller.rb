@@ -1,6 +1,6 @@
 class MarketsController < ApplicationController
-  before_action :set_market, only: %i[ show edit update destroy buy sell]
-
+  before_action :set_market, only: %i[ show edit update destroy buy sell remove_market]
+  skip_before_action :verify_authenticity_token, :only => [:remove_market]
   # GET /markets or /markets.json
   def index
     @markets = Market.all
@@ -56,6 +56,14 @@ class MarketsController < ApplicationController
   # DELETE /markets/1 or /markets/1.json
   def destroy
     authorize Market, :destroy?
+    @market.destroy
+    respond_to do |format|
+      format.html { redirect_to markets_url, notice: "Market was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  def remove_market
     @market.destroy
     respond_to do |format|
       format.html { redirect_to markets_url, notice: "Market was successfully destroyed." }

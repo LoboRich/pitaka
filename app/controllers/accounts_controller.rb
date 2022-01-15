@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
   before_action :authenticate_user!, :except => [:new]
-  before_action :set_account, only: %i[ show edit update destroy ]
+  before_action :set_account, only: %i[ show edit update destroy remove_account]
+  skip_before_action :verify_authenticity_token, :only => [:remove_account]
 
   # GET /accounts or /accounts.json
   def index
@@ -28,6 +29,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/new
   def new
+    authorize Account, :new?
     @account = Account.new
     @account.build_user
     @roles = Account.roles.reject{|x| x == 'admin'}
@@ -67,6 +69,14 @@ class AccountsController < ApplicationController
 
   # DELETE /accounts/1 or /accounts/1.json
   def destroy
+    @account.destroy
+    respond_to do |format|
+      format.html { redirect_to accounts_url, notice: "Account was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  def remove_account
     @account.destroy
     respond_to do |format|
       format.html { redirect_to accounts_url, notice: "Account was successfully destroyed." }

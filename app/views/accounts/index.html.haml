@@ -54,8 +54,9 @@
                         - if policy(:account).actions?
                           = link_to 'Show', account
                           = link_to 'Edit', edit_account_path(account)
-                          = link_to 'Destroy', account, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+                          -#= link_to 'Destroy', account, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                          %form{action: remove_account_account_path(account), method: "post"}
+                            %input{name: "destroy_account", type: "submit", value: "Destroy"}
 :javascript
   var table = $('#example').DataTable( {
     responsive: true

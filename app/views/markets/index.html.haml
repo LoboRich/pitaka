@@ -59,7 +59,10 @@
                         - if policy(:market).actions?
                           = link_to 'Show', market
                           = link_to 'Edit', edit_market_path(market)
-                          = link_to 'Destroy', market, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                          -#= link_to 'Destroy', remove_attachment_market_path(market), method: :post
+                          -#%button{onclick: remove_attachment_market_path(market)} Destroy
+                          %form{action: remove_market_market_path(market), method: "post"}
+                            %input{name: "destroy_market", type: "submit", value: "Destroy"}
 
 :javascript
   var table = $('#example').DataTable( {
