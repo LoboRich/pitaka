@@ -1,5 +1,7 @@
 # ₱TAKA Stock App
 
+![image](https://user-images.githubusercontent.com/86831395/149603265-74a749ed-bd27-4a37-8345-9891d32e765e.png)
+
 This project is a forked project from the main repo https://github.com/avionschool/rails-base-project. ₱TAKA's primary function is to buy and sell stocks from the stock market.
 
 #### Version
@@ -39,21 +41,13 @@ Then, clone your forked repo to your machine
 
 #### See it live
 
-```
-
 https://pitaka-stock-app.herokuapp.com/users/sign_in
 
-###### Admin Credentials: 
-###### mail: admin@example.com
-###### password: password [only 1 admin]
 ```
-
-
-#### How to enable Github Workflow
-
-<img width="906" alt="Screen Shot 2021-03-23 at 10 10 52 PM" src="https://user-images.githubusercontent.com/9253881/112160501-2fe2bf80-8c25-11eb-8e2b-b9508711ec70.png">
-
-<img width="1244" alt="Screen Shot 2021-03-23 at 10 11 12 PM" src="https://user-images.githubusercontent.com/9253881/112160530-36713700-8c25-11eb-9f00-d69a3a36343f.png">
+Admin Credentials: 
+Email: admin@example.com
+password: password [only 1 admin]
+```
 
 
 ### Collaborators
