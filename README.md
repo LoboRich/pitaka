@@ -49,6 +49,17 @@ Email: admin@example.com
 password: password [only 1 admin]
 ```
 
+#### API
+1. Currency Exchange Rate
+   - https://pitaka-stock-app.herokuapp.com/api/exchange_rate?currency=USD
+2. Random Activity Suggestion
+   - https://pitaka-stock-app.herokuapp.com/api/activity_suggestion
+3. Random Cat fact 
+   - https://pitaka-stock-app.herokuapp.com/api/cat_fact
+4. Random Emoji positive face
+   - https://pitaka-stock-app.herokuapp.com/api/random_positive_emoji
+5. Random quote
+   - http://pitaka-stock-app.herokuapp.com/api/random_quote
 
 ### Collaborators
 1. Kimcarl Cacas
