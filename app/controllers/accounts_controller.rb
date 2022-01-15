@@ -21,7 +21,8 @@ class AccountsController < ApplicationController
       @revenue = MarketPortfolio.revenue(@portfolio)
     else
       @account = Account.find(params[:id])
-      @portfolio = @account.portfolio.market_portfolios
+      @portfolio = @account.portfolio
+      @market_portfolios = @portfolio.market_portfolios
     end
   end
 
