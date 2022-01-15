@@ -1,6 +1,6 @@
 require 'rest-client'
 
-module PesoExchangeRate
+module ExchangeRate
     class Request
         BASE_URL = 'https://v6.exchangerate-api.com/v6'
         TOKEN = 'token'
